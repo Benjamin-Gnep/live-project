@@ -8,15 +8,22 @@
             end-placeholder="结束时间"
             placeholder="选择时间范围">
         </el-time-picker>
+        <br/><br/>
+        <p>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="appointmentTimeVisible = false">取 消</el-button>
+            <el-button type="primary" @click="appointmentTimeVisible = false">确认设置</el-button>
+          </span>
+        </p>
   </div>
 </template>
 
 <script>
     export default {
         data() {
-        return {
-            value1: [new Date(2020, 3, 15, 0, 0), new Date(2020, 3, 15, 23, 59)]
-        }
+            return {
+                value1: [new Date(2020, 3, 15, 0, 0), new Date(2020, 3, 15, 23, 59)]
+            }
         }
     }
 </script>
