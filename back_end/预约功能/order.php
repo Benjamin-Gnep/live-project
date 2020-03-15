@@ -1,15 +1,15 @@
 <?php
 	require ('config.php');
 
- 	$name = $_POST['name'];
-  	$IDnum = $_POST['ID_num'];
- 	$phone = $_POST['phone'];
-  	$num = $_POST['num'];
+ 	$name = $_GET['name'];
+  	$IDnum = $_GET['ID_num'];
+ 	$phone = $_GET['phone'];
+  	$num = $_GET['num'];
 	
 	$db = new mysqli($host,$user,$DBpassword,$dbName);
 	if(mysqli_connect_errno()){
-		echo "错误：无法连接到数据库，请稍后再次重试";
-		exit;
+		$json = "无法连接到数据库，请稍后再次重试";
+		echo json_encode($json);
 	}
 	
 	function isCreditNo($vStr){
@@ -43,7 +43,7 @@
 
 	
 	if (isCreditNo($IDnum)==false){
-		$json = "身份证号输入格式错误，请重新输入";
+		$json = "身份证号输入格式错误";
 		echo json_encode($json);
 		exit;
 	}
@@ -70,7 +70,7 @@
 		$ro = $res -> fetch_assoc();
 		$time = $ti - $ro['time'];
 		if($time <= 3){
-			$json = "该手机号或者身份证号在此前三次预约中成功中签，预约失败";
+			$json = "手机号或者身份证号在此前三次预约中成功中签";
 			echo json_encode($json);
 			exit;
 		}
@@ -79,17 +79,10 @@
 	
 	$query = "insert into appointment(time,name,IDnum,phone,num,win) 
 	values('$ti','$name','$IDnum','$phone','$num','否')";
-	echo $query;
 	$result = $db->query($query);
 	
-	if($result){
-		
-		$json = "预约成功";
-		echo json_encode($json);
-	}
-	else{
-		
-		$json = "系统出错，请稍后再试";
+	if(!$result){
+		$json = "写入数据库出错";
 		echo json_encode($json);
 		exit;
 	}
@@ -98,16 +91,9 @@
 	$result = $db->query($query);
 	$row = $result->fetch_assoc();
 	$id = $row['id'];
-	$json = "预约编号为：".$id;
+	$json = $id;
 	echo json_encode($json);
 
 	$result -> free();
 	$db -> close();
 ?>
-	
-	
-	
-	
-	
-	
-	
