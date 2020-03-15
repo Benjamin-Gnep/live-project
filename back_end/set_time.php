@@ -1,6 +1,5 @@
 <?php
     header('Content-type: text/html; charset=UTF8');
-    $time==$_GET["time"];
     $open_time=$_GET["open_time"];
     $close_time=$_GET["close_time"];
 	$user="RemoteUser";
@@ -14,7 +13,7 @@
 	}
 	$link->query("SET NAMES utf8");
     $sql="update users set open_time= '"."$open_time'
-        close_time='"."$close_time'  where time = '".$time."'";		// sql查询
+        close_time='"."$close_time' ";		// sql执行
      $result= mysqli_query($conn,$sql);
     if($result){
         exit("<script>

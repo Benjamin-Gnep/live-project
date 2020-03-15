@@ -1,6 +1,5 @@
 <?php
     header('Content-type: text/html; charset=UTF8');
-    $time==$_GET["time"];
     $total=$_GET["total"];
 	$user="RemoteUser";
   	$host='123.57.41.237';
@@ -12,8 +11,7 @@
 		echo ("数据库连接出错\n");
 	}
 	$link->query("SET NAMES utf8");
-    $sql="update users set total= '"."$total'
-        where time = '".$time."'";		// sql查询
+    $sql="update users set total= '"."$total'";		// sql查询
      $result= mysqli_query($conn,$sql);
     if($result){
         exit("<script>
