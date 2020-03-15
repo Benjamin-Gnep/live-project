@@ -26,10 +26,10 @@
     </el-row>
     <br/>
     <el-row>
-      <el-button type="primary" @click.native="exportFormVisible = true">导出中签名单至本地</el-button>
-      <el-dialog :visible.sync="exportFormVisible" title="输出导出轮次">
-        <ExportForm>
-        </ExportForm>
+      <el-button type="primary" @click.native="ExportTableVisible = true">导出中签名单至页面</el-button>
+      <el-dialog :visible.sync="ExportTableVisible" title="输出导出轮次">
+        <ExportTable>
+        </ExportTable>
       </el-dialog>
     </el-row>
   </div>
@@ -37,14 +37,14 @@
 
 <script>
 import TimePicker from './components/TimePicker'
-import ExportForm from './components/ExportForm'
+import ExportTable from './components/ExportTable'
 import MaskAmountForm from './components/MaskAmountForm'
 import AppointAmountForm from './components/AppointAmountForm'
   export default {
     name: 'App',
     components: {
       TimePicker,
-      ExportForm,
+      ExportTable,
       AppointAmountForm,
       MaskAmountForm
     },
@@ -52,7 +52,7 @@ import AppointAmountForm from './components/AppointAmountForm'
         return {
           appointmentTimeVisible: false,
           appointmentAmountVisible: false,
-          exportFormVisible: false,
+          ExportTableVisible: false,
           maskAmountVisible: false
         }
     }

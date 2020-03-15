@@ -15,6 +15,13 @@
         <el-button type="primary" @click="submitForm('numberValidateForm')">确认导出</el-button>
     </el-form-item>
     </el-form>
+    <el-dialog title="该轮中签名单" :visible.sync="tableVisible">
+      <el-table :data="gridData">
+        <el-table-column property="id" label="编号" width="150"></el-table-column>
+        <el-table-column property="name" label="姓名" width="200"></el-table-column>
+        <el-table-column property="phone" label="电话"></el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
@@ -24,34 +31,43 @@
     name: 'AmountForm',
     data() {
       return {
+        gridData: [],
         numberValidateForm: {
           amount: ''
-        }
+        },
+        tableVisible: false
       }
     },
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('导出成功!')
-          } else {
-            console.log('导出失败!!')
-            return false
-          }
-        })
-      },
       getData: function() {
+        var _this = this
         axios.get('api/Export_win.php', {
             params: {
               time: this.numberValidateForm['amount']
             }
           }).then(function(res) {
+            _this.gridData = res.data
             window.console.log(res.data)
             return 'true'
           }).catch(function (error) {
             console.log(error)
             return 'false'
           })
+      },
+      submitForm(formName) {
+        this.getData()
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('导出成功!正在生成表格')
+            this.creatForm()
+          } else {
+            console.log('error!!')
+            return false
+          }
+        })
+      },
+      creatForm: function() {
+        this.tableVisible = true
       }
     }
   }

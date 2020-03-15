@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
     name: 'AmountForm',
     data() {
@@ -29,6 +30,20 @@
       }
     },
     methods: {
+      getData: function() {
+        axios.get('api/set_tatal.php', {
+            params: {
+              total: this.numberValidateForm['amount']
+            }
+          }).then(function(res) {
+            _this.gridData = res.data
+            window.console.log(res.data)
+            return 'true'
+          }).catch(function (error) {
+            console.log(error)
+            return 'false'
+          })
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
