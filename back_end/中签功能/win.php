@@ -15,8 +15,18 @@
 	$result=[];		// 这个是要发送给前端的数组
 	while($row=$res->fetch_assoc())
 	{
-		array_push($result,$row);
-    }
+		//array_push($result,$row);
+		if($row['win']=='是')
+		{
+			//$rows=$row['name']+$row['IDnum']+$row['phone']+$row['num'];
+			array_push($result,$row['name'],$row['IDnum'],$row['phone'],$row['num']);
+			$link->close();	
+			echo json_encode($result);
+			return $result;
+		}
+		
+	}
     echo json_encode($result);		// 这一步很关键，要把数组打包成json发送
-    $link->close();		// 记得关闭连接
+	$link->close();		// 记得关闭连接
+	return $result;
 ?>
