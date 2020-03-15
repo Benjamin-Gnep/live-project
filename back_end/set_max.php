@@ -1,10 +1,7 @@
 <?php
     header('Content-type: text/html; charset=UTF8');
     $time==$_GET["time"];
-    $open_time=$_GET["open_time"];
-    $close_time=$_GET["close_time"];
     $max=$_GET["max"];
-    $total=$_GET["total"];
 	$user="RemoteUser";
   	$host='123.57.41.237';
 	$DBpassword='Remote1798164846';
@@ -15,9 +12,8 @@
 		echo ("数据库连接出错\n");
 	}
 	$link->query("SET NAMES utf8");
-    $sql="update users set open_time= '"."$open_time'
-        close_time='"."$close_time' max ='"."$max'
-        total = '"."$total' where time = '".$time."'";		// sql查询
+    $sql="update users set max= '"."$max'
+        where time = '".$time."'";		// sql查询
      $result= mysqli_query($conn,$sql);
     if($result){
         exit("<script>
