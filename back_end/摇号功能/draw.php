@@ -3,8 +3,6 @@
     header("Content-type:text/html;charset=utf-8");
     //$json=array();        // 测试输出
 
-    $time=$_GET["time"];    // 获取要开奖的活动是第几次活动
-    //$time=2;              // 测试用
     $user="RemoteUser";
   	$host='123.57.41.237';
 	$DBpassword='Remote1798164846';
@@ -15,6 +13,17 @@
 		echo ("sss");
     }
     mysqli_set_charset($link, "utf8");
+
+    $sql0="SELECT * FROM manage";		// sql查询manage表
+    $res0=mysqli_query($link,$sql0);
+    $time=0;       // 摇号的活动次数
+    while($row=$res0->fetch_assoc())
+	{
+        if($time<$row['time'])
+        {
+            $time=$row['time'];        // 获取要摇号的活动是最新的当前活动
+        }
+    }
 
     $sql1="SELECT * FROM manage WHERE time = '".$time."'";		// sql查询manage表
     $res1=mysqli_query($link,$sql1);
