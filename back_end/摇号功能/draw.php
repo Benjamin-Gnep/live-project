@@ -1,9 +1,10 @@
 <?php
+    require("randFunction.php");
     header("Content-type:text/html;charset=utf-8");
-    $json=array();
+    //$json=array();
 
     $time=$_GET["time"];    // 获取要开奖的活动是第几次活动
-    //$time=1;              //测试用
+    //$time=2;              //测试用
     $user="RemoteUser";
   	$host='123.57.41.237';
 	$DBpassword='Remote1798164846';
@@ -28,6 +29,8 @@
     $startID=0;
     $endID=0;
     $idArray=array();
+    $idNumArray=array();
+    $weightArray=array();
     $numArray=array();
     $winArray=array();
     $win = "是";
@@ -41,17 +44,38 @@
         {
             $endID=$row['id'];      // 本次预约成功的结束id
         }
-        array_push($idArray,$row['id']);     // id的索引数组
-        array_push($numArray,$row['num']);   // 所需数量的索引数组
-        array_push($winArray,$row['win']);   // 是否中奖的索引数组
+        array_push($idArray,$row['id']);       // id的索引数组
+        array_push($idNumArray,$row['IDnum']); // IDnum的索引数组
+        array_push($weightArray,100);            // 权重的索引数组，初始权重均为100
+        array_push($numArray,$row['num']);     // 所需数量的索引数组
+        array_push($winArray,$row['win']);     // 是否中奖的索引数组
     }
 
     //array_push($json,$total,$idArray,$numArray,$winArray);
 
+    for($x=0;$x<count($idArray);$x++)
+    {
+        $sql3="SELECT * FROM appointment WHERE time < '".$time."' AND IDnum = '".$idNumArray[$x]."'";  // sql查询
+        $res3=mysqli_query($link,$sql3);
+        while($row=$res3->fetch_assoc())
+	    {
+            if($row['win']=="是")
+            {
+                $weightArray[$x]=round($weightArray[$x]*(1-0.1));      //每中签一次，权重*0.9
+            }
+            else if($row['win']=="否")
+            {
+                $weightArray[$x]=round($weightArray[$x]*(1+0.1));      //每落选一次，权重*1.1
+            }
+        }
+    }
+
+    //array_push($json,$weightArray);
+
     $flag=1;
     while($total>0)
     {
-        $winID=mt_rand(0,$endID-$startID);     // 随机取得一个中签用户id
+        $winID=MyRand($weightArray);     // 随机取得一个中签用户id
         if($winArray[$winID]=="否" && $numArray[$winID]<=$total)  // 若该用户未中签且需要的口罩数量小于当前所剩余数量
         {
             $winArray[$winID]="是";            // 该用户的中奖标志设为1
