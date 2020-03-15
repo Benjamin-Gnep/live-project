@@ -3,6 +3,7 @@
     <VisitingCard id='visitingCard'></VisitingCard>
     <Form></Form>
     <div id='additionalButton'>
+      <AdminForm></AdminForm>
       <el-button style="margin-left:95px;" id='newButton' @click.native="newAppointment">发起新预约</el-button>
       <el-button id='endButton' @click.native="endAppointment">结束预约</el-button>
     </div>
@@ -11,23 +12,40 @@
 
 <script>
   import Form from './components/Form'
+  import AdminForm from './components/AdminForm'
   import VisitingCard from './components/VisitingCard'
   import Select from './components/Select'
   import Search from './components/Search'
+  import axios from 'axios'
 export default {
   name: 'App',
   components: {
     Form,
     Select,
     VisitingCard,
-    Search
+    Search,
+    AdminForm
   },
   methods: {
     newAppointment: function() {
-      window.location.href = 'http://radishbear.top/ky/#/'
+      axios.get('api/newAppointment.php', {
+          params: {
+          }
+        }).then(function(res) {
+         alert('开始新一轮预约！')
+        }).catch(function (error) {
+          window.console.log(error)
+        })
     },
     endAppointment: function() {
-      alert('结束预约')
+     axios.get('api/draw.php', {
+          params: {
+          }
+        }).then(function(res) {
+         alert('已结束本轮预约！')
+        }).catch(function (error) {
+          window.console.log(error)
+        })
     }
   }
 }

@@ -29,6 +29,7 @@ export default {
           this.input = ''
       },
       getData: function() {
+          var that = this
           axios.get('api/win.php', {
           params: {
             id: this.input
@@ -36,6 +37,15 @@ export default {
         }).then(function(res) {
             window.console.log(res.data)
             if (res.data === '未中签') {
+                that.$alert('抱歉您未中签', '未中签', {
+          confirmButtonText: '确定'
+        })
+            }else{
+                var msg = '姓名:' + res.data[0] + '  电话:' +
+                res.data[2] + '  购买数量:' + res.data[3] + '  凭证:' + res.data[1]
+                that.$alert(msg, '恭喜您中签了', {
+          confirmButtonText: '确定'
+             })
             }
         })
       }
