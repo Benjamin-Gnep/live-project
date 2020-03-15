@@ -55,11 +55,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          if(this.getData() === 'true') {
-            alert('预约成功')
-          }else {
-            alert('预约失败')
-          }
+          this.getData()
         } else {
           console.log('error submit!!')
           return false
@@ -70,6 +66,7 @@ export default {
       this.$refs[formName].resetFields()
     },
     getData: function() {
+      var that = this
       axios.get('api/order.php', {
           params: {
             type: this.$Type,
@@ -79,13 +76,26 @@ export default {
             num: this.ruleForm['number']
           }
         }).then(function(res) {
-          alert('php响应成功')
+          if (res.data > 0) {
+         that.$notify({
+          title: '预约成功！',
+          message: '您的编号为:' + res.data,
+          type: 'success'
+        })
+          }else{
+          that.$notify.error({
+          title: '预约失败！',
+          message: '成功原因:' + res.data,
+          type: 'error'
+        })
+          }
           window.console.log(res.data)
-          return 'true'
         }).catch(function (error) {
-          alert('php响应失败')
+          that.$notify.error({
+          title: '错误',
+          message: 'php未响应'
+        })
           console.log(error)
-          return 'false'
         })
     }
   }

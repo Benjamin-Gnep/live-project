@@ -13,12 +13,14 @@
   import Form from './components/Form'
   import VisitingCard from './components/VisitingCard'
   import Select from './components/Select'
+  import Search from './components/Search'
 export default {
   name: 'App',
   components: {
     Form,
     Select,
-    VisitingCard
+    VisitingCard,
+    Search
   },
   methods: {
     newAppointment: function() {
