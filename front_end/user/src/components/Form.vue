@@ -14,14 +14,16 @@
         <el-input v-model="ruleForm.number"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">立即预约</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')">&nbsp;立即预约&nbsp;</el-button>
+        <el-button @click="resetForm('ruleForm')" style="width='2000px'">&nbsp;&nbsp;&nbsp;&nbsp;重&nbsp;置&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
-<script>export default {
+<script>
+import axios from 'axios'
+export default {
     name: 'Form',
   data() {
     return {
@@ -38,7 +40,7 @@
         ],
         id: [
           { required: true, message: '请输入身份证号', trigger: 'blur' },
-          { min: 15, max: 18, message: '身份证号位数不对', trigger: 'blur' }
+          { min: 1, max: 18, message: '身份证号位数不对', trigger: 'blur' }
         ],
         phone: [
            { required: true, message: '请输入手机号', trigger: 'blur' }
@@ -53,8 +55,11 @@
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert(this.ruleForm['name'])
-          alert()
+          if(this.getData() === 'true') {
+            alert('预约成功')
+          }else {
+            alert('预约失败')
+          }
         } else {
           console.log('error submit!!')
           return false
@@ -63,6 +68,25 @@
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
+    },
+    getData: function() {
+      axios.get('api/order.php', {
+          params: {
+            type: this.$Type,
+            name: this.ruleForm['name'],
+            ID_num: this.ruleForm['id'],
+            phone: this.ruleForm['phone'],
+            num: this.ruleForm['number']
+          }
+        }).then(function(res) {
+          alert('php响应成功')
+          window.console.log(res.data)
+          return 'true'
+        }).catch(function (error) {
+          alert('php响应失败')
+          console.log(error)
+          return 'false'
+        })
     }
   }
   }

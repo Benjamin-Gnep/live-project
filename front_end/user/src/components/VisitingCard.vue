@@ -3,9 +3,9 @@
     height: 200px;    overflow: hidden;
     background-color:rgb(37, 74, 100)
     " ref="box">
-    <img id="BackGround" src="../../static/img/背景.png" class="WelcomePart" style="position:relative;z-index:2;;
+    <img id="BackGround" src="../../static/img/background.png" class="WelcomePart" style="position:relative;z-index:2;;
     margin-top:-320px;margin-left: -250px;">
-    <img id="ForeGround" src="../../static/img/蒙版.png" class="WelcomePart" style="position:relative;margin-top: -190px;z-index:100001">
+    <img id="ForeGround" src="../../static/img/mask.png" class="WelcomePart" style="position:relative;margin-top: -190px;z-index:100001">
   </div>
 </template>
 

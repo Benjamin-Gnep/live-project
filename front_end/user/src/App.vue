@@ -2,8 +2,10 @@
   <div id="app">
     <VisitingCard id='visitingCard'></VisitingCard>
     <Form></Form>
-    <el-button>结束预约</el-button>
-    <el-button>发起新预约</el-button>
+    <div id='additionalButton'>
+      <el-button style="margin-left:95px;" id='newButton' @click.native="newAppointment">发起新预约</el-button>
+      <el-button id='endButton' @click.native="endAppointment">结束预约</el-button>
+    </div>
   </div>
 </template>
 
@@ -17,6 +19,14 @@ export default {
     Form,
     Select,
     VisitingCard
+  },
+  methods: {
+    newAppointment: function() {
+      window.location.href = 'http://radishbear.top/ky/#/'
+    },
+    endAppointment: function() {
+      alert('结束预约')
+    }
   }
 }
 </script>
