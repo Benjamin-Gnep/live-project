@@ -15,8 +15,22 @@
 		echo ("数据库连接出错\n");
 	}
 	$link->query("SET NAMES utf8");
-	$sql='UPDATE * FROM manager where time ='+ $time ;		// sql查询
-	$res=mysqli_query($link,$sql);
-    
+    $sql="update users set open_time= '"."$open_time'
+        close_time='"."$close_time' max ='"."$max'
+        total = '"."$total' where time = '".$time."'";		// sql查询
+     $result= mysqli_query($conn,$sql);
+    if($result){
+        exit("<script>
+            alert('修改成功');
+            location.href='index.php'
+            </script>");
+        }
+    else{
+        exit("<script>
+            alert('修改失败');
+            location.href='index.php';
+            </script>");
+        }
+
     $link->close();		// 记得关闭连接
 ?>
