@@ -19,6 +19,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
     export default {
     name: 'AmountForm',
     data() {
@@ -38,6 +39,19 @@
             return false
           }
         })
+      },
+      getData: function() {
+        axios.get('api/Export_win.php', {
+            params: {
+              time: this.numberValidateForm['amount']
+            }
+          }).then(function(res) {
+            window.console.log(res.data)
+            return 'true'
+          }).catch(function (error) {
+            console.log(error)
+            return 'false'
+          })
       }
     }
   }

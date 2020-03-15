@@ -40,7 +40,6 @@ import TimePicker from './components/TimePicker'
 import ExportForm from './components/ExportForm'
 import MaskAmountForm from './components/MaskAmountForm'
 import AppointAmountForm from './components/AppointAmountForm'
-
   export default {
     name: 'App',
     components: {
@@ -56,8 +55,6 @@ import AppointAmountForm from './components/AppointAmountForm'
           exportFormVisible: false,
           maskAmountVisible: false
         }
-    },
-    methods: {
     }
   }
 </script>
