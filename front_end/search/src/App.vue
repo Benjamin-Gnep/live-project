@@ -8,13 +8,13 @@
 <script>
   import Form from './components/Form'
   import Select from './components/Select'
-  export default {
-    name: 'App',
-    components: {
-      Form,
-      Select
-    }
+export default {
+  name: 'App',
+  components: {
+    Form,
+    Select
   }
+}
 </script>
 
 <style>
