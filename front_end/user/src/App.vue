@@ -1,12 +1,6 @@
 <template>
   <div id="app">
-    <VisitingCard id='visitingCard'></VisitingCard>
-    <Form></Form>
-    <div id='additionalButton'>
-      <AdminForm></AdminForm>
-      <el-button style="margin-left:95px;" id='newButton' @click.native="newAppointment">发起新预约</el-button>
-      <el-button id='endButton' @click.native="endAppointment">结束预约</el-button>
-    </div>
+    <Search></Search>
   </div>
 </template>
 

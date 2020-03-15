@@ -43,7 +43,8 @@ export default {
           { min: 1, max: 18, message: '身份证号位数不对', trigger: 'blur' }
         ],
         phone: [
-           { required: true, message: '请输入手机号', trigger: 'blur' }
+           { required: true, message: '请输入手机号', trigger: 'blur' },
+           { min: 11, max: 11, message: '手机号位数不对', trigger: 'blur' }
         ],
         number: [
            { required: true, message: '请输入预购数量', trigger: 'blur' }
@@ -85,7 +86,7 @@ export default {
           }else{
           that.$notify.error({
           title: '预约失败！',
-          message: '成功原因:' + res.data,
+          message: '失败原因:' + res.data,
           type: 'error'
         })
           }
