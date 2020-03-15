@@ -1,20 +1,20 @@
 <template>
-    <div id='APP'>
-      <el-select v-model="value" placeholder="请选择">
-        <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-        :disabled="item.disabled">
-        </el-option>
-      </el-select>
-    </div>
+  <div id='APP'>
+  <el-select v-model="value" placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+</div>
 </template>
 
 <script>
-  import Vue from 'vue'
-export default {
+ import Vue from 'vue'
+  export default {
+    name: 'Select',
     data() {
       return {
         options: [{
@@ -40,7 +40,3 @@ export default {
   var Ctor = Vue.extend(this)
   new Ctor().$mount('#app')
 </script>
-
-<style scoped>
-
-</style>
