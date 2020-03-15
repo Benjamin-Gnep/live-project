@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // 预约查询
 
 //判断身份证号码是否合法
@@ -44,10 +44,10 @@ $link = new mysqli($host, $user, $DBpassword, $dbName);
 if ($link->connect_error) {
     echo ("错误: 无法连接到数据库. 请稍后再次重试.");
 }
-$sql = "SELECT * FROM appointment WHERE IDname ='" . $IDnum. "'";
+$sql = "SELECT * FROM appointment WHERE IDnum ='" . $IDnum. "'";
 $link->query('SET NAMES UTF8');
 $res = $link->query($sql);//返回结果
-if (!$res){
+if ($res){
     $row=$res->fetch_assoc();
     //此前三次预约中成功中签,return false;
     //如果本次摇号已经登记过， return false;
