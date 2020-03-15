@@ -1,18 +1,15 @@
 <template>
   <div id="app">
     <Form></Form>
-    <Select></Select>
   </div>
 </template>
 
 <script>
   import Form from './components/Form'
-  import Select from './components/Select'
 export default {
   name: 'App',
   components: {
-    Form,
-    Select
+    Form
   }
 }
 </script>
