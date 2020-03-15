@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <Form></Form>
-    <Select></Select>
+    <h2>尊敬的管理员，您好！</h2>
+    <p>请设置口罩预约的时间段：</p>
+    <TimePicker/>
+    <Button>
+    </Button>
   </div>
 </template>
 
 <script>
-  import Form from './components/Form'
-  import Select from './components/Select'
+import TimePicker from './components/TimePicker'
+import Button from './components/Button'
   export default {
     name: 'App',
     components: {
-      Form,
-      Select
+      TimePicker,
+      Button
     }
   }
 </script>
