@@ -1,4 +1,5 @@
 ﻿<?php
+header("Content-type:textml;charset=utf-8");
 // 预约查询
 
 //判断身份证号码是否合法
@@ -33,7 +34,6 @@ function isCreditNo($vStr){
 
 //预约判断
 function cheak_IDnum(){
-header("Content-type:textml;charset=utf-8");
 $IDnum = $_GET["IDnum"];//前端获取用户身份号码
 if (isCreditNo($IDnum)==false) return false;
 $host = '数据库地址';
