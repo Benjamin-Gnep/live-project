@@ -24,9 +24,8 @@
 			echo json_encode($result);
 			return $result;
 		}
-		
 	}
-    echo json_encode($result);		// 这一步很关键，要把数组打包成json发送
-	$link->close();		// 记得关闭连接
+    echo json_encode($result);		
+	$link->close();		
 	return $result;
 ?>
