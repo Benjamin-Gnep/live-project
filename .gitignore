@@ -1,0 +1,3 @@
+# 忽略掉产生Github中仓库安全问题的文件
+package-lock.json
+package.json
